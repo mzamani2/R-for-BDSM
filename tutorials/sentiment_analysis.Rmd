@@ -1,5 +1,5 @@
 ---
-title: 'Social Media Analytics V'
+title: 'Big Data meets Small Data'
 subtitle: "Sentiment analysis in R"
 output:
   html_document:

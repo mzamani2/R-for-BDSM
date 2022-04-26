@@ -1,5 +1,5 @@
 ---
-title: 'Social Media Analytics IV'
+title: 'Big Data meeets Small Data'
 subtitle: "Exploratory text analysis in R"
 output:
   html_document:
@@ -113,8 +113,8 @@ The first one opens the package, but we already did that above.
 The second one reads the data into R. That's the one we need, so copy it.
 (your code will look different from mine, because this is the location on my computer)
 
-```{r}
-vaccin_2021_04_08 = read_csv("data/vaccin_2021_04_08.csv")
+```{r, eval = F}
+vaccin_2021_04_08 = read_csv(here::here("data/vaccin_2021_04_08.csv"))
 ```
 
 Oh no!! You probably got some red text about warnings and parsing failures and stuff. 
@@ -156,7 +156,7 @@ The semicolon format used by OBI4wan is actually also pretty common, and is ofte
 And for this second common standard, there is also the `read_csv2` function.
 
 ```{r}
-vaccin_2021_04_08 = read_csv2("data/vaccin_2021_04_08.csv")
+vaccin_2021_04_08 = read_csv2(here::here("data/vaccin_2021_04_08.csv"))
 ```
 
 So there's our one line of code solution!
@@ -185,9 +185,9 @@ library(dplyr)
 library(readr)   
 
 d = bind_rows(
-  read_csv2("data/vaccin_2021_04_06.csv"),
-  read_csv2("data/vaccin_2021_04_07.csv"),
-  read_csv2("data/vaccin_2021_04_08.csv"))
+  read_csv2(here::here("data/vaccin_2021_04_06.csv")),
+  read_csv2(here::here("data/vaccin_2021_04_07.csv")),
+  read_csv2(here::here("data/vaccin_2021_04_08.csv")))
 ```
 
 Now we have a single data frame with 60.000 rows, where each row is a tweet.
