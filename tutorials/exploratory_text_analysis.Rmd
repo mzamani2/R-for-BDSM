@@ -1,5 +1,5 @@
 ---
-title: 'Big Data meeets Small Data'
+title: 'Big Data meets Small Data'
 subtitle: "Exploratory text analysis in R"
 output:
   html_document:
