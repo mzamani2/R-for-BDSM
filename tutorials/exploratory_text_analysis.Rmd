@@ -1,5 +1,9 @@
 ---
+<<<<<<< HEAD
 title: 'Big Data meets Small Data'
+=======
+title: 'Big Data Meets Small Data'
+>>>>>>> 87f3aceb1ccb67be84ae4839e2083a8e7f8d664d
 subtitle: "Exploratory text analysis in R"
 output:
   html_document:
