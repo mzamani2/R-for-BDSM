@@ -18,9 +18,9 @@ knitr::opts_chunk$set(message=FALSE, warning=FALSE)
 
 VU Amsterdam
 
-# This practical
+# This tutorial
 
-In the second practical you performed a (quick) validation of the OBI4wan sentiment analysis tool. 
+In the first tutorial manual you learned a (quick) validation of the OBI4wan sentiment analysis tool. 
 Your specific findings were different (because you could choose your own topic), but in general people found that the sentiment labels (positive, negative or neutral) were not very accurate. 
 In the reflection on this accuracy you identified various limitations.
 For instance, it makes sense that a computer would have a hard time dealing with sarcasm, where someone might say something positive, but actually mean it in a negative way.
@@ -30,25 +30,21 @@ What is happening here is that the individual words tend to be associated with n
 Another issue was the simplification of sentiment into just three categories.
 Overall, most messages were labeled neutral, but messages are rarely completely neutral, so how negative or positive should a message be before we label it as such?
 
-In this practical you will develop a better intuition for the limitations of automatic sentiment analysis by taking a look under the hood of two general approaches for classifying texts into categories: rule-based and supervised machine learning. 
+In this tutorial you will develop a better intuition for the limitations of automatic sentiment analysis by taking a look under the hood of two general approaches for classifying texts into categories: rule-based and supervised machine learning. 
 As you'll see, these techniques can be applied for many more purposes than just sentiment analysis.
 Supervised machine learning in particular has become a hugely important technique to understand (or at least know about), that is at the hearth of many revolutionary feats of computers, such as machine translation, image recognition, and even self-driving cars.
 We won't dive that deep into the method, but you will see what it is, and even apply it yourself. 
 
 
-# Rules based versus supervised machine learning
+# Rule-based approach vs supervised machine learning
 
-The difference between rule-based and supervised machine learning has also been discussed in the second video lecture, so we won't discuss it here in detail. But we'll re-cap the main overview. 
-
-In the lecture we actually discussed three general branches of text analysis techniques. 
-Next to `rule-based` and `supervised machine learning`, we also discussed `unsupervised machine learning`.
-You worked with `unsupervised machine learning` in the previous practical, when you trained and interpreted a `topic model`. What set's this approach apart is that it does not require any supervision. 
+You worked with `unsupervised machine learning` in the previous tutorial, when you trained and interpreted a `topic model`. What set's this approach apart is that it does not require any supervision. 
 We simply gave our computer a bunch of texts, and it came up with useful patterns in the data (in this case topics).
 
 For sentiment analysis this won't do. We can't expect a computer to learn how to measure sentiment by itself. We need to teach a computer how to do this. The difference between `rule-based` and `supervised machine learning` is basically about how we will teach this:
-
-## Rule-based 
-
+  
+## Rule-based approach
+  
 One way to teach a computer to perform a certain measurement, is by giving the computer a set of specific rules for how to measure. An example that you already worked with is search queries. A query tells a computer very specifically what to look for. The query `corona AND vaccin*` tells the computer unambiguously: if a text contains the word "corona", and contains a word that starts with "vaccin", measure this as TRUE (i.e. the text did match the query). If not, measure this as FALSE. 
 
 The benefit of this approach is that you have complete control over how the computer performs the measurement. 
@@ -69,37 +65,34 @@ And yet still, it tends to perform poorly for many real-life applications.
 
 ### Supervised machine-learning
 
-So, a big limitation of rule-based approaches for sentiment analysis seems to be that we just can't seem to come up with a sufficiently complex set of rules.
+So, a big limitation of rule-based approaches for sentiment analysis is that we just can't come up with a sufficiently complex set of measurement rules.
 But how can we teach a computer to do something without specifically telling it how to do it?
 This is where `supervised machine-learning` comes in.
-In `supervised machine learning` we provide the computer with `training data`, and then let it figure out the rules by itself! 
-
+In `supervised machine learning` we provide the computer with a `training data set`, and then let the computer figure out the rules by itself! 
+  
 For example, consider the case of a `spam filter`.
-We want to teach a computer to automatically label new emails as spam or not spam.
-We first need to create our training data.
-For this we collect some old emails, and manually label them as either spam or not spam.
+We want to teach a computer (otherwise known as 'model' or 'algorithm') to automatically label new emails as spam or not spam.
+We first need to create our training data set.
+For this, we collect some old emails, and manually label them as either spam or not spam.
 So now we can give the computer a set of emails that are spam, and a set of emails that are not spam, according to our own interpretation.
-From this data the computer can learn how the spam and not spam emails are different.
-In a way, it can learn 'rules'[^1] for distinguishing between them.
-Then, when it receives new emails, it can use these rules to decide whether it is more likely to be spam or not spam.
+During the learning phase in supervised machine learning, the computer gets a feel for differences between spam and non-spam emails.
+Stated differently, the computer learns the 'rules'[^1] for distinguishing between spam and non-spam emails.
+Then, when the computer receives new emails, it can draw on its knowledge of the rules to decide whether each email is more likely to be spam or not.
 
-[^1]: It should be mentioned that at this point the definition of a rule becomes a bit fuzzy. 
+[^1]: It should be mentioned that at this point the definition of 'rules' is getting a bit fuzzy. Here, rules are being used in the sense of 'patterns' or 'relationships'.
 In simple machine learning algorithms, the computer will come up with simple rules.
-The Naive Bayes algorithm that you'll use in this practical basically creates something very similar to a dictionary. 
-But there are also much more complex algorithms where the 'rules' exists as a complex neural network.
-So when we say 'rule', we really just mean that the computer learned some way to 
+The Naive Bayes algorithm that you'll use in this tutorial basically creates something very similar to a dictionary. 
+But there are also much more complex algorithms where 'rules' exist as a complex neural network.
 
-A very simple machine learning algorithm would for instance just look at the occurrences of certain words.
-By looking at the training data, it would figure out that certain words are much more likely to be used in spam emails.
-Then, when it encounters these words in new emails, it can decide that these emails are likely to be spam as well.
+A very simple machine learning algorithm would, for instance, just look at the occurrences of certain words.
+By looking at the training data set, spam-detection algorithms learn that certain words are much more likely to appear in spam emails.
+As a result, when spam-detection algorithms identify such words in new emails, they decide that these emails are likely to be spam as well.
 
 The cool thing about supervised machine learning is that this same approach works for many different types of data.
-The input can be a set of emails that we want to classify into either spam or not spam, but it can also be a set of animal pictures that we want to classify into which animal is depicted. 
+The input can be a set of emails that we want to classify into either spam or not spam, but it can also be a set of animal pictures that we want to classify by the name of the animal shown in the them. 
 If you take this much further, it could be many games of chess to learn which next move is most likely to make you win.
-Generally speaking, supervised machine leaning lets you teach computers to perform complicated tasks without having to tell them how to perform these tasks.
-The price is that you need to provide sufficient training data for them to learn this themselves.
-
-
+Generally speaking, supervised machine leaning lets you teach computers to perform complicated tasks without having to tell them how to perform these task.
+All you need to do is expose the computer to a sufficient training data set so that it learns the rules for performing a task.
 
 # Sentiment analysis in R
 
